@@ -133,10 +133,10 @@ LOGGING = {
             'format': '{asctime} {levelname} {module} {message}'
         },
         'error': {
-            'format': '{asctime} {levelname} {pathname} {filename} {stack_info} {message} '
+            'format': '{asctime} {levelname} {pathname} {stack_info} {message}'
         },
         'email': {
-            'format': '{asctime} {levelname} {pathname} {filename} {message} '
+            'format': '{asctime} {levelname} {pathname} {message}'
         },
     },
     'filters': {
@@ -148,11 +148,23 @@ LOGGING = {
         },
     },
     'handlers': {
-        'console': {
+        'console_d': {
             'level': 'DEBUG',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
             'formatter': 'simple'
+        },
+        'console_w': {
+            'level': 'WARNING',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'email'
+        },
+        'console_ec': {
+            'level': 'ERROR',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'error'
         },
         'mail_admins': {
             'level': 'ERROR',
