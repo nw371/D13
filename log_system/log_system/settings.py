@@ -129,6 +129,9 @@ LOGGING = {
         'simple': {
         'format': '{levelname} {message}'
         },
+        'general': {
+            'format': '{asctime} {levelname} {module} {message}'
+        },
     },
     'filters': {
         'require_debug_true': {
@@ -150,6 +153,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': '/logs/general.log',
+            'formatter': 'general'
         },
         'errors': {
             'level': 'ERROR',
