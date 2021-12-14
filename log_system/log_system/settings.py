@@ -127,7 +127,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'simple': {
-        'format': '{levelname} {message}'
+        'format': '{asctime} {levelname} {message}'
         },
         'general': {
             'format': '{asctime} {levelname} {module} {message}'
@@ -135,11 +135,17 @@ LOGGING = {
         'error': {
             'format': '{asctime} {levelname} {pathname} {filename} {stack_info} {message} '
         },
+        'email': {
+            'format': '{asctime} {levelname} {pathname} {filename} {message} '
+        },
     },
     'filters': {
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
             },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
     },
     'handlers': {
         'console': {
@@ -150,10 +156,13 @@ LOGGING = {
         },
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+            'formatter': 'email'
         },
         'general': {
             'level': 'INFO',
+            'filters': ['require_debug_false'],
             'class': 'logging.FileHandler',
             'filename': '/logs/general.log',
             'formatter': 'general'
@@ -168,6 +177,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/logs/security.log',
+            'formatter': 'general'
         },
     },
     'loggers': {
