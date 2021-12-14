@@ -132,6 +132,9 @@ LOGGING = {
         'general': {
             'format': '{asctime} {levelname} {module} {message}'
         },
+        'error': {
+            'format': '{asctime} {levelname} {pathname} {filename} {stack_info} {message} '
+        },
     },
     'filters': {
         'require_debug_true': {
@@ -159,6 +162,7 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
             'filename': '/logs/errors.log',
+            'formatter': 'error'
         },
         'security': {
             'level': 'DEBUG',
